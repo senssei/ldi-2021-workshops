@@ -1,0 +1,11 @@
+https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA22QzWrDMBCE74G8w9xs07hxXEqgxbe+QQI9GsVaRyKWZKTNT0MfvlLt9NSTWO1o5hsNxDDatowGUjCxNpTX1WZbVpuyei3el4shScTtP0ldVi+o67eqeghlUtVqnpTz+u5ss5XxQpJxrREnagN5TaFeLr6R5nKaYc+mEZdjHs8CzmIfg3YszIjeOzNjsptgnmZvBKYxxR6+ELREMr0q8vQ7NQ2y/W6TAVivgUADdQwRd/Y4EFIVzOm983HRDSQseVx0OItB3wVrZ5Mn3ZisTCrqREgtp3etpM6Z0QVqH7tUYBVBteV8plxLLopk46NJtE/BnRKecdWsctY8UJN90gFiHJ/BXvS97uD6iGScZbX6S47kYEWwkQhXolNqnr4Ku6nIxwykE3pW/AC6dyYJ4gEAAA==
+
+let min_t = datetime(2017-01-05);
+let max_t = datetime(2017-02-03 22:00);
+let dt = 2h;
+let horizon=7d;
+demo_make_series2
+| make-series num=avg(num) on TimeStamp from min_t to max_t+horizon step dt by sid 
+| where sid == 'TS1'   //  select a single time series for a cleaner visualization
+| extend forecast = series_decompose_forecast(num, toint(horizon/dt))
+| render timechart with(title='Web app. traffic of a month, forecasting the next week by Time Series Decomposition')

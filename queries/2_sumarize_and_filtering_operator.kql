@@ -1,0 +1,16 @@
+https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA5XPwQrCMAwG4Luwd8ixhQnuLHsGD4rXEbfoik0raQpT9vBaBx705PGHPx9/PCmwC51CCxpTjx7FDMSxY7xSl0gcpQZmSJkZxT2o1M3BMe0V+Wbttlr5guD0F4LTF/LTr1YzlLxeMoTMbR9zUGNhoDNmr+0GYoCPAy6AYLiQeb9UL6NqaEYLpzvs0pGkqEJhIAF93fUjij4B6lqsDAUBAAA=
+
+let min_t = toscalar(demo_make_series1 | summarize min(TimeStamp));
+let max_t = toscalar(demo_make_series1 | summarize max(TimeStamp));
+demo_make_series1
+| make-series num=count() default=0 on TimeStamp in range(min_t, max_t, 1h) by OsVer
+| render timechart 
+
+https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA5WPwYoCMRBE74L/UMcEsuAc9iTzDR5cvIbemVaDk4x0OjAufvxOHPCgJy8NRVe9rh5YEUPyihY65o4GEtNzHH2kC/vMEjg3uCOXGEnCH1e7+QmR90rxau12vRoqhKaPIDS9QN7869UdVX8tGqnEthtLUmPR85HKoO0GY8KTg5AglE5sHi+5pZRDc7b4vWGXDyyVypNy6uetr8wF749BzCwdhK9MahqHb+ugUniZtkZlDrJA55PdmUT/AULnFrNAAQAA
+
+let min_t = toscalar(demo_make_series1 | summarize min(TimeStamp));
+let max_t = toscalar(demo_make_series1 | summarize max(TimeStamp));
+demo_make_series1
+| make-series num=count() default=0 on TimeStamp in range(min_t, max_t, 1h) by OsVer
+| extend ma_num=series_fir(num, repeat(1, 5), true, true)
+| render timechart

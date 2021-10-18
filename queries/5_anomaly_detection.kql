@@ -1,0 +1,10 @@
+https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA3WRzWrDMBCE74W8w5CLY7AT2yUUWvwUCfRoFHsdi+rHSJu/0oevlDhtD81JrHb0zc5KEUNL0zBqdIKJpaZFVZQveVHmxTp9mz2pKBHn/yRVXjyjql6L4i7soqoaQtWRto0WH9R4cpJ8NXv6QqzzWw1z0LU47hfhTGENtoG7YaFH9M7qaSq2k7dnGiN9d4GXHSLsNJCja1XXSLabMgGwWgGeFLUMEXpmrwhxYkyuvXWh0SoShhyO0h+Ekp+CpTWRSWcm02EhjNWhQT6Db62jDDsRsNJQGgLeWE1HrdWj9dT8yGOaDOVynSEvMyTxRS85SSPcBXQwvYkv7SAc4yR5WNxvrDpo4+s/5ixZUZ280w5iHJdgJ/petrB9SKGt4SHDjzxJQ/yDJ8wfe+GR1zzuenrFA/1SITx2VnUYrTTs41fF/rTPK9kvvwHEs2SHSAIAAA==
+
+let min_t = datetime(2017-01-05);
+let max_t = datetime(2017-02-03 22:00);
+let dt = 2h;
+demo_make_series2
+| make-series num=avg(num) on TimeStamp from min_t to max_t step dt by sid 
+| where sid == 'TS1'   //  select a single time series for a cleaner visualization
+| extend (anomalies, score, baseline) = series_decompose_anomalies(num, 1.5, -1, 'linefit')
+| render anomalychart with(anomalycolumns=anomalies, title='Web app. traffic of a month, anomalies') //use "| render anomalychart with anomalycolumns=anomalies" to render the anomalies as bold points on the series charts.

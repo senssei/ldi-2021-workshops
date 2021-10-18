@@ -1,0 +1,13 @@
+https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA0tJzc2Pz03MTo0vTi3KTC02VODlqlEoAQooGBoAABC1CDQdAAAA
+
+demo_make_series1 
+| take 10
+
+
+https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA0tJzc2Pz03MTo0vTi3KTC02VODlqlFIzi/NKwEAeQ9hpBsAAAA=
+
+demo_make_series1 
+| count
+
+611132
+

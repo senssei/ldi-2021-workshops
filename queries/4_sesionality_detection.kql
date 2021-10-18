@@ -1,0 +1,9 @@
+https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA12OwQ6CMBBE7yb+wxypqVbQK99CkN2EGttt6GIw8eMFwYvHnTezM8RBmsyD53zZ795Ig9y5UxRp1oSyRe5k4GxQY7U1G2mIdXYWcQwW55NFeSVX9RaVgXMqWDm0Z2wR+Pg91Qfevi2d4XnkKbWR8Fe6QJ6UZ0LtK9dVf1AhGW8P/u0zrqQPhiYZA8QAAAA=
+
+demo_series3
+| render timechart
+
+demo_series3
+| project (periods, scores) = series_periods_detect(num, 0., 14d/2h, 2) //to detect the periods in the time series
+| mv-expand periods, scores
+| extend days=2h*todouble(periods)/1d

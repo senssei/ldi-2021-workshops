@@ -1,0 +1,5 @@
+https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA0tJzc2PL04tykwtNuLlqlFIrShJzUtRgIjEp2WWxBvlZOalFmtUauogi4IEgWIgLUVADalFCiCR5IzEohKF8sySDI2K5Pyc0tw82wpNAF1o0K9jAAAA
+
+demo_series2
+| extend series_fit_2lines(y), series_fit_line(y)
+| render linechart with(xcolumn=x)
